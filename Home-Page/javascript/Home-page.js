@@ -112,12 +112,21 @@ fetch("http://localhost:3000/books?_start=0&_limit=10")
       const bookAuthor = card.querySelector(".book__author");
       const bookTitle = card.querySelector(".book__title");
       const bookImage = card.querySelector(".book__img");
+      const bookLink = card.querySelector(".book__link");
+      const urlSearchParams = new URLSearchParams();
+      urlSearchParams.append("id", book["id"]);
+      console.log(book["id"]);
+      const href =
+        "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
+        urlSearchParams.toString();
+      bookLink.href = href;
       bookImage.src = book.image;
       bookAuthor.textContent = book.author;
       bookTitle.textContent = book.title;
       bookCardContainer.appendChild(card);
     });
   });
+
 // ******************
 
 
@@ -198,13 +207,24 @@ fetch("http://localhost:3000/books")
                 if (index < maxDisplayedBooks) {
                     var newBooks_card = document.createElement('div');
                     newBooks_card.classList.add('newBooks_card');
+                    //navigate the book to book detail page
+                    const urlSearchParams = new URLSearchParams();
+                    urlSearchParams.append("id", book["id"]);
+                    console.log(book["id"]);
+                    const href =
+                      "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
+                      urlSearchParams.toString();
+
                     newBooks_card.innerHTML = `
-                        <img class="" src="${book.image}" alt="cover" width="190rem" height="280rem">
+                       <a href="${href}"> <img class="" src="${book.image}" alt="cover" width="190rem" height="280rem"></a>
                         <p class="newBooks-card_text">${book.author}</p>
                         <h1 class="newBooks-card_title">${book.title}</h1> 
                         <a href="#"><i class="fa-regular fa-heart" style="font-size:2.5rem; "></i></a>
                         <a href="#"><i class="fa-solid fa-heart" style="font-size:2.5rem; display:none;"></i></a>`;
-                    newBooks.appendChild(newBooks_card);
+                  
+                  
+                  
+                        newBooks.appendChild(newBooks_card);
                 }
             });
 
@@ -250,9 +270,16 @@ fetch("http://localhost:3000/books")
         visibleTopBooksArr.forEach((book) => {
           var topBooks_card = document.createElement("div");
           topBooks_card.classList.add("topBooks_card");
+          const urlSearchParams = new URLSearchParams();
+          urlSearchParams.append("id", book["id"]);
+          console.log(book["id"]);
+          const href =
+            "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
+            urlSearchParams.toString();
+
           topBooks_card.innerHTML = `
             
-              <img src="${book.image}" alt="cover" width="350rem" height="350rem">
+             <a href="${href}"> <img src="${book.image}" alt="cover" width="350rem" height="350rem"></a>
           
             <p class="topBooks-card_text">${book.author}</p>
             <h1 class="topBooks-card_title">${book.title}</h1>

@@ -164,3 +164,31 @@ p{
 #register{
     left: 500px;
 }
+
+
+
+.form-control {
+    font-size: 2rem;
+  }
+  .btn {
+    font-size: 2rem;
+  }
+  .container {
+    font-size: 2rem;
+  }
+  .row{
+    font-size: 2rem;
+  }
+  i {
+    font-size: 2.5rem;
+  }
+  .col-md-12 {
+    font-size: 2rem;
+  }
+  .follow {
+    font-size: rem;
+  }
+  h5{
+    font-size: 3rem;
+  }
+  
