@@ -18,44 +18,42 @@
 </head>
 <body>
 
-   <!--* Start Header -->
-   <header class="header">
+  <!--* Start Header -->
+  <header class="header">
     <div class="header__box">
-      <a href="index.html" class="logo-link">
+      <a href="../user-profile/UserProfile.html" class="logo-link">
         <img
-          src="images/logo.png"
+          src="../Home-Page/images/LogoNew.png"
           alt="An image of a logo"
           class="logo-img" />
       </a>
       <nav class="main-nav">
         <ul class="main-nav__list">
           <li class="list-item">
-            <a href="index.html">Home</a>
+            <a href="../index.html">Home</a>
           </li>
           <li class="list-item">
-            <a href="#">Register</a>
+            <a href="Catalog-Page/Catalog-Page.html">Book Catalog</a>
+          </li>
+  
+          <li class="list-item">
+            <a href="../About-Us/About-Us.html">About Us</a>
           </li>
           <li class="list-item">
-            <a href="#">News</a>
-          </li>
-          <li class="list-item">
-            <a href="#">About Us</a>
-          </li>
-          <li class="list-item">
-            <a href="#">Contact Us</a>
+            <a href="../user-profile/contactus.html">Contact Us</a>
           </li>
         </ul>
       </nav>
     </div>
     <div class="header__box2">
-      <a href="./Search-Page/search-page.html" class="search__link">
+      <a href="../Search-Page/search-page.html" class="search__link">
         <div class="search__btn--header">
           <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </a>
-      <div>
-        <button id="login">Login</button>
-        <button id="signUp">Sign Up</button>
+      <div class="register-btns">
+        <a href="../log/register.html"> <button id="login">Login</button></a>
+        <a href="../log/register.html">  <button id="signUp">Sign Up</button></a>
       </div>
       <div class="hamburger">
         <span class="bar"></span>
@@ -75,7 +73,7 @@
 
 
     <!-- catalog btn-->
-  <div class="container">
+  <!-- <div class="container">
     <div id="type-buttons">
         <button id="btn-all">All</button>
         <button id="btn_fiction">Fiction</button>
@@ -88,8 +86,26 @@
     </div>
     <div id="pagination">
 
-    </div>
+    </div> -->
 <!--End catalog btn-->
+
+
+<div class="container">
+  <div id="dropdown-container">
+      <label for="book-categories">Select a category:</label>
+      <select id="book-categories">
+          <option id="btn-all">All</option>
+          <option id="btn_fiction">Fiction</option>
+          <option id="btn-nonfiction">Non-Fiction</option>
+          <option id="btn-classic">Classic</option>
+          <option id="btn-scifi">Science Fiction</option>
+          <option id="btn-Fantasy">Fantasy</option>
+      </select>
+  </div>
+  <div id="book-container" class="Books"></div>
+</div>
+
+
 
 <!-- Books section  -->
 <section id="Books-section">
@@ -116,19 +132,19 @@
         <h3 class="nav-footer__heading">Pages</h3>
         <ul class="nav-footer__links">
           <li class="link-item">
-            <a href="./index.html">Home</a>
+            <a href="../index.html">Home</a>
           </li>
           <li class="link-item">
             <a href="#">Books Catalog</a>
           </li>
           <li class="link-item">
-            <a href="./Search-Page/search-page.html">Books Search</a>
+            <a href="../Search-Page/search-page.html">Books Search</a>
           </li>
           <li class="link-item">
-            <a href="./About-Us/About-Us.html">About Us</a>
+            <a href="../About-Us/About-Us.html">About Us</a>
           </li>
           <li class="link-item">
-            <a href="./user-profile/contactus.html">Contact Us</a>
+            <a href="../user-profile/contactus.html">Contact Us</a>
           </li>
         </ul>
       </div>
@@ -138,10 +154,10 @@
           <h3 class="footer-quickLinks__heading">Quick Links</h3>
           <ul class="footer-quickLinks__links">
             <li class="link-item">
-              <a href="FAQ/FAQ.html">FAQ</a>
+              <a href="../FAQ/FAQ.html">FAQ</a>
             </li>
             <li class="link-item">
-              <a href="./privacy page/privacy.html">Privacy Policy</a>
+              <a href="../privacy page/privacy.html">Privacy Policy</a>
             </li>
           
           </ul>

@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const bookContainer = document.getElementById("book-container");
   const allButton = document.getElementById("btn-all");
@@ -6,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const nonfictionButton = document.getElementById("btn-nonfiction");
   const classicButton = document.getElementById("btn-classic");
   const scifiButton = document.getElementById("btn-scifi");
-  const FantasyButton = document.getElementById("btn-Fantasy");
+  const fantasyButton = document.getElementById("btn-Fantasy");
   const booksSection = document.getElementById("Books");
+  const bookDropdown = document.getElementById("book-categories"); // The dropdown element
 
   let allBooksData = []; // Store all books data here
   let currentPage = 1;
@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to display books based on the selected type and page
   function displayBooksByTypeAndPage(type, page) {
-    const startIndex = (page - 1) * booksPerPage; //0
-    const endIndex = startIndex + booksPerPage; //10
+    const startIndex = (page - 1) * booksPerPage;
+    const endIndex = startIndex + booksPerPage;
     const filteredBooks = allBooksData
-      .filter(book => type === "" || book.type === type) // Display all books if type is empty
+      .filter(book => type === "" || book.type === type)
       .slice(startIndex, endIndex);
     renderBooks(filteredBooks);
     updatePaginationButtons();
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </a>
         <p class="newBooks-card_text">${book.author}</p>
         <h1 class="newBooks-card_title">${book.title}</h1>
-        <a hreaf=""><i class="fa-solid fa-heart"></i></a>
+        <a href=""><i class="fa-solid fa-heart"></i></a>
         `;
       booksSection.appendChild(bookCard);
     });
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentPage = 1;
     displayBooksByTypeAndPage(currentType, currentPage);
   });
-  FantasyButton.addEventListener("click", () => {
+  fantasyButton.addEventListener("click", () => {
     currentType = "Fantasy";
     currentPage = 1;
     displayBooksByTypeAndPage(currentType, currentPage);
@@ -126,25 +126,28 @@ document.addEventListener("DOMContentLoaded", function () {
       displayBooksByTypeAndPage(currentType, currentPage);
     }
   });
-});
 
-// Get all the buttons in the type-buttons container
-const buttons = document.querySelectorAll('#type-buttons button');
+  // Add event listener to the dropdown
+  bookDropdown.addEventListener("change", () => {
+    currentType = bookDropdown.value;
+    currentPage = 1;
+    displayBooksByTypeAndPage(currentType, currentPage);
+  });
 
-// Add the "active" class to the "All" button by default
-const allButton = document.getElementById('btn-all');
-allButton.classList.add('active');
+  // Get all the buttons in the type-buttons container
+  const buttons = document.querySelectorAll('#type-buttons button');
 
-// Add click event listeners to the buttons
-buttons.forEach((button) => {
-button.addEventListener('click', () => {
-  // Remove the active class from all buttons
-  buttons.forEach((btn) => btn.classList.remove('active'));
-  
-  // Add the active class to the clicked button
-  button.classList.add('active');
-  
-  // You can also perform other actions associated with the button click here
-  // For example, update the content based on the button clicked
-});
+  // Add the "active" class to the "All" button by default
+  allButton.classList.add('active');
+
+  // Add click event listeners to the buttons
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      // Remove the active class from all buttons
+      buttons.forEach((btn) => btn.classList.remove('active'));
+
+      // Add the active class to the clicked button
+      button.classList.add('active');
+    });
+  });
 });
