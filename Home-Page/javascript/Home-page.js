@@ -138,6 +138,10 @@ fetch("http://localhost:3000/books?_start=0&_limit=10")
       const bookAuthor = card.querySelector(".book__author");
       const bookTitle = card.querySelector(".book__title");
       const bookImage = card.querySelector(".book__img");
+      const urlSearchParams = new URLSearchParams();
+    
+
+        
       bookImage.src = book.image;
       bookAuthor.textContent = book.author;
       bookTitle.textContent = book.title;
@@ -224,9 +228,20 @@ fetch("http://localhost:3000/books")
                 if (index < maxDisplayedBooks) {
                     var newBooks_card = document.createElement('div');
                     newBooks_card.classList.add('newBooks_card');
+                    const urlSearchParams = new URLSearchParams();
+                    urlSearchParams.append("id", book["id"]);
+                    console.log(book["id"]);
+                    const href =
+                      "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
+                      urlSearchParams.toString();
                     newBooks_card.innerHTML = `
-                        <img class="" src="${book.image}" alt="cover" width="190rem" height="280rem">
-                        <p class="newBooks-card_text">${book.author}</p>
+                    <a href="${href}" class="book__link">
+                    <img src="${book.image}" alt="cover" width="280rem" height="280rem">
+                    <div class="book__overlay">
+                      <p>Read More</p>
+                    </div>
+                  </a>                    
+                      <p class="newBooks-card_text">${book.author}</p>
                         <h1 class="newBooks-card_title">${book.title}</h1> 
                         <a href="#"><i class="fa-regular fa-heart" style="font-size:2.5rem; "></i></a>
                         <a href="#"><i class="fa-solid fa-heart" style="font-size:2.5rem; display:none;"></i></a>`;
@@ -261,7 +276,7 @@ fetch("http://localhost:3000/books")
     }
 });
 // End Handel the slider in NewBooks-cards section 
-// Get the top books from the JSON server
+// Fetch the books from the JSON server
 fetch("http://localhost:3000/books")
   .then((res) => res.json())
   .then((books) => {
@@ -271,17 +286,32 @@ fetch("http://localhost:3000/books")
 
       function renderTopBooks() {
         topBooks.innerHTML = "";
-        var visibleTopBooksArr = booksArr.slice(8,11 );
 
-        visibleTopBooksArr.forEach((book) => {
+        // Sort the books by rating in descending order
+        booksArr.sort((a, b) => b.rate - a.rate);
+
+        // Get the top 3 rated books
+        var topRatedBooks = booksArr.slice(0, 3);
+
+        topRatedBooks.forEach((book) => {
           var topBooks_card = document.createElement("div");
           topBooks_card.classList.add("topBooks_card");
+          const urlSearchParams = new URLSearchParams();
+          urlSearchParams.append("id", book["id"]);
+          console.log(book["id"]);
+          const href =
+            "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
+            urlSearchParams.toString();
           topBooks_card.innerHTML = `
-            
-              <img src="${book.image}" alt="cover" width="350rem" height="350rem">
-          
+          <a href="${href}" class="book__link">
+          <img src="${book.image}" alt="cover" width="350rem" height="350rem">
+          <div class="book__overlay">
+            <p>Read More</p>
+          </div>
+        </a>
             <p class="topBooks-card_text">${book.author}</p>
             <h1 class="topBooks-card_title">${book.title}</h1>
+            <p class="topBooks-card_rating" style="font-size:2rem;">Rating: ${book.rate}</p>
             <a href="#"><i class="fa-regular fa-heart" style="font-size:2.5rem;"></i></a>
             <a href="#"><i class="fa-solid fa-heart" style="font-size:2.5rem; display:none;"></i></a>`;
           topBooks.appendChild(topBooks_card);
