@@ -1,3 +1,23 @@
+//* Hamburger Menu
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".main-nav__list");
+const register_btns = document.querySelector(".register-btns");
+
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+  register_btns.classList.toggle("active");
+});
+
+//* Add event listeners to list items
+document.querySelectorAll(".list-item").forEach((element) => {
+  element.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+    register_btns.remove("active");
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   const bookContainer = document.getElementById("book-container");
   const allButton = document.getElementById("btn-all");
@@ -19,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const startIndex = (page - 1) * booksPerPage;
     const endIndex = startIndex + booksPerPage;
     const filteredBooks = allBooksData
-      .filter(book => type === "" || book.type === type)
+      .filter((book) => type === "" || book.type === type)
       .slice(startIndex, endIndex);
     renderBooks(filteredBooks);
     updatePaginationButtons();
@@ -27,16 +47,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Function to render books in the bookContainer
   function renderBooks(books) {
-    booksSection.innerHTML = ''; // Clear the existing books
-    books.forEach(book => {
-      const bookCard = document.createElement('div');
-      bookCard.classList.add('Books_card');
+    booksSection.innerHTML = ""; // Clear the existing books
+    books.forEach((book) => {
+      const bookCard = document.createElement("div");
+      bookCard.classList.add("Books_card");
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.append("type", book["type"]);
       const urlSearchParams = new URLSearchParams();
       urlSearchParams.append("id", book["id"]);
-      console.log(book["id"]);
       const href =
-        "http://127.0.0.1:5500/Book-Details/Book-Details.html?" +
-        urlSearchParams.toString();
+        "http://127.0.0.1:5501/Book-Details/Book-Details.html?" +
+        urlSearchParams.toString() +
+        "&" +
+        urlParams;
 
       bookCard.innerHTML = `
         <a href="${href}" class="book__link">
@@ -56,24 +79,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to update pagination buttons based on the current page
   function updatePaginationButtons() {
     const totalPages = Math.ceil(
-      allBooksData.filter(book => currentType === "" || book.type === currentType).length / booksPerPage
+      allBooksData.filter(
+        (book) => currentType === "" || book.type === currentType
+      ).length / booksPerPage
     );
 
     // Show/hide the "Previous" button
-    document.getElementById("prev-button").style.display = currentPage > 1 ? "block" : "none";
+    document.getElementById("prev-button").style.display =
+      currentPage > 1 ? "block" : "none";
 
     // Show/hide the "Next" button
-    document.getElementById("next-button").style.display = currentPage < totalPages ? "block" : "none";
+    document.getElementById("next-button").style.display =
+      currentPage < totalPages ? "block" : "none";
   }
 
   // Fetch all books data and store it
-  fetch('http://localhost:3000/books')
-    .then(response => response.json())
-    .then(data => {
+  fetch("http://localhost:3000/books")
+    .then((response) => response.json())
+    .then((data) => {
       allBooksData = data;
       displayBooksByTypeAndPage(currentType, currentPage); // Display all books initially
     })
-    .catch(error => {
+    .catch((error) => {
       console.error("Error fetching data:", error);
     });
 
@@ -119,7 +146,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("next-button").addEventListener("click", () => {
     const totalPages = Math.ceil(
-      allBooksData.filter(book => currentType === "" || book.type === currentType).length / booksPerPage
+      allBooksData.filter(
+        (book) => currentType === "" || book.type === currentType
+      ).length / booksPerPage
     );
     if (currentPage < totalPages) {
       currentPage++;
@@ -135,19 +164,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Get all the buttons in the type-buttons container
-  const buttons = document.querySelectorAll('#type-buttons button');
+  const buttons = document.querySelectorAll("#type-buttons button");
 
   // Add the "active" class to the "All" button by default
-  allButton.classList.add('active');
+  allButton.classList.add("active");
 
   // Add click event listeners to the buttons
   buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
       // Remove the active class from all buttons
-      buttons.forEach((btn) => btn.classList.remove('active'));
+      buttons.forEach((btn) => btn.classList.remove("active"));
 
       // Add the active class to the clicked button
-      button.classList.add('active');
+      button.classList.add("active");
     });
   });
 });
